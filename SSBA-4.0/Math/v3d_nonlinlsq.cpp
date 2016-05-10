@@ -3,7 +3,7 @@
 #include <map>
 
 #if defined(V3DLIB_ENABLE_SUITESPARSE)
-# include "colamd.h"
+#include <suitesparse/colamd.h>
 # include "Math/v3d_ldl_private.h"
 
 using namespace std;

@@ -2,7 +2,7 @@
 
 #if defined(V3DLIB_ENABLE_SUITESPARSE)
 //# include "COLAMD/Include/colamd.h"
-# include "colamd.h"
+#include <suitesparse/colamd.h>
 # if 0
 extern "C"
 {

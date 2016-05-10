@@ -3,6 +3,8 @@
 #ifndef V3D_SERIALIZATION_H
 #define V3D_SERIALIZATION_H
 
+#define NOMINMAX
+
 #include <string>
 #include <iostream>
 #include <fstream>
