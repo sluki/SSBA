@@ -3,9 +3,9 @@
 #ifndef V3D_CAMERA_MATRIX_H
 #define V3D_CAMERA_MATRIX_H
 
-#include "Base/v3d_serialization.h"
-#include "Math/v3d_linear.h"
-#include "Geometry/v3d_distortion.h"
+#include "../Base/v3d_serialization.h"
+#include "../Math/v3d_linear.h"
+#include "../Geometry/v3d_distortion.h"
 
 namespace V3D
 {

@@ -8,7 +8,7 @@
 #include <vector>
 #include <cmath>
 
-#include "Base/v3d_serialization.h"
+#include "../Base/v3d_serialization.h"
 
 namespace V3D
 {

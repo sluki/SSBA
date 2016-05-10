@@ -13,7 +13,7 @@
 #include <map>
 #include <cstring>
 
-#include "Base/v3d_exception.h"
+#include "../Base/v3d_exception.h"
 
 //! Adds load and save routines to the serializable struct.
 #define V3D_DEFINE_LOAD_SAVE(T)                                         \

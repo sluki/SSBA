@@ -2,12 +2,10 @@
 #ifndef V3D_METRICBUNDLE_H
 #define V3D_METRICBUNDLE_H
 
-# if defined(V3DLIB_ENABLE_SUITESPARSE)
-
-#include "Math/v3d_optimization.h"
-#include "Math/v3d_linear.h"
-#include "Geometry/v3d_cameramatrix.h"
-#include "Geometry/v3d_distortion.h"
+#include "../Math/v3d_optimization.h"
+#include "../Math/v3d_linear.h"
+#include "../Geometry/v3d_cameramatrix.h"
+#include "../Geometry/v3d_distortion.h"
 
 namespace V3D
 {
@@ -445,5 +443,3 @@ namespace V3D
 } // end namespace V3D
 
 # endif
-
-#endif

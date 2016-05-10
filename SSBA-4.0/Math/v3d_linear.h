@@ -3,7 +3,7 @@
 #ifndef V3D_LINEAR_H
 #define V3D_LINEAR_H
 
-#include "Math/v3d_linearbase.h"
+#include "../Math/v3d_linearbase.h"
 
 #include <iostream>
 

@@ -1,6 +1,4 @@
-#include "Geometry/v3d_stereobundle.h"
-
-#if defined(V3DLIB_ENABLE_SUITESPARSE)
+#include "../Geometry/v3d_stereobundle.h"
 
 using namespace V3D;
 
@@ -68,4 +66,3 @@ namespace V3D
 
 } // end namespace V3D
 
-#endif

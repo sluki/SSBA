@@ -2,18 +2,16 @@
 #ifndef V3D_NONLINEAR_LSQR_H
 #define V3D_NONLINEAR_LSQR_H
 
-#include "Math/v3d_linear.h"
-#include "Math/v3d_linear_tnt.h"
-#include "Math/v3d_mathutilities.h"
-#include "Math/v3d_optimization.h"
+#include "../Math/v3d_linear.h"
+#include "../Math/v3d_linear_tnt.h"
+#include "../Math/v3d_mathutilities.h"
+#include "../Math/v3d_optimization.h"
 
 #include <vector>
 #include <iostream>
 
 namespace V3D
 {
-
-#if defined(V3DLIB_ENABLE_SUITESPARSE)
 
 #define NLSQ_MAX_PARAM_TYPES 32
 
@@ -216,8 +214,6 @@ namespace V3D
          int _paramTypeRowStart[NLSQ_MAX_PARAM_TYPES + 1];
          CCS_Matrix<double> _JtJ;
    }; // end struct NLSQ_LM_Optimizer
-
-#endif // defined(V3DLIB_ENABLE_SUITESPARSE)
 
 } // end namespace V3D
 

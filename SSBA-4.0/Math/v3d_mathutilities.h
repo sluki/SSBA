@@ -3,8 +3,8 @@
 #ifndef V3D_MATH_UTILITIES_H
 #define V3D_MATH_UTILITIES_H
 
-#include "Math/v3d_linear.h"
-#include "Math/v3d_linear_tnt.h"
+#include "../Math/v3d_linear.h"
+#include "../Math/v3d_linear_tnt.h"
 
 #include <vector>
 

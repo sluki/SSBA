@@ -1,6 +1,5 @@
-#include "Math/v3d_optimization.h"
+#include "../Math/v3d_optimization.h"
 
-#if defined(V3DLIB_ENABLE_SUITESPARSE)
 //# include "COLAMD/Include/colamd.h"
 #include <suitesparse/colamd.h>
 # if 0
@@ -10,9 +9,8 @@ extern "C"
 #  include "ldl.h"
 }
 # else
-#  include "Math/v3d_ldl_private.h"
+#  include "../Math/v3d_ldl_private.h"
 # endif
-#endif
 
 #define USE_BLOCK_REORDERING 1
 //#define USE_MULTIPLICATIVE_UPDATE 1
@@ -26,8 +24,6 @@ namespace V3D
 {
 
    int optimizerVerbosenessLevel = 0;
-
-#if defined(V3DLIB_ENABLE_SUITESPARSE)
 
    void
    SparseLevenbergOptimizer::setupSparseJtJ()
@@ -983,6 +979,5 @@ namespace V3D
          cout << "Leaving SparseLevenbergOptimizer::minimize()." << endl;
    } // end SparseLevenbergOptimizer::minimize()
 
-#endif // defined(V3DLIB_ENABLE_SUITESPARSE)
 
 } // end namespace V3D

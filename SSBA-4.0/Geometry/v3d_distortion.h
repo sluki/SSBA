@@ -2,7 +2,7 @@
 #ifndef V3D_DISTORTION_H
 #define V3D_DISTORTION_H
 
-#include "Math/v3d_linear.h"
+#include "../Math/v3d_linear.h"
 
 namespace V3D
 {

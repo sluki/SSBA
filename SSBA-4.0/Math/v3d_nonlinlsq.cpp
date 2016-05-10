@@ -1,10 +1,9 @@
-#include "Math/v3d_nonlinlsq.h"
+#include "../Math/v3d_nonlinlsq.h"
 
 #include <map>
 
-#if defined(V3DLIB_ENABLE_SUITESPARSE)
 #include <suitesparse/colamd.h>
-# include "Math/v3d_ldl_private.h"
+# include "../Math/v3d_ldl_private.h"
 
 using namespace std;
 using namespace V3D;
@@ -826,4 +825,3 @@ namespace V3D
 
 } // end namespace V3D
 
-#endif

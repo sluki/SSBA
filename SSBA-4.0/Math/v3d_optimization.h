@@ -3,9 +3,9 @@
 #ifndef V3D_OPTIMIZATION_H
 #define V3D_OPTIMIZATION_H
 
-#include "Math/v3d_linear.h"
-#include "Math/v3d_linear_tnt.h"
-#include "Math/v3d_mathutilities.h"
+#include "../Math/v3d_linear.h"
+#include "../Math/v3d_linear_tnt.h"
+#include "../Math/v3d_mathutilities.h"
 
 #include <vector>
 #include <iostream>
@@ -284,8 +284,6 @@ namespace V3D
    }; // end struct SimpleLevenbergOptimizer
 
 //----------------------------------------------------------------------
-
-# if defined(V3DLIB_ENABLE_SUITESPARSE)
 
    struct SparseLevenbergOptimizer : public LevenbergOptimizerCommon
    {
@@ -626,7 +624,6 @@ namespace V3D
          Matrix<double> _X, _Y, _Z; // X = A^t*C, Y = B^t*C, Z = C^t*C
    }; // end struct ExtSparseLevenbergOptimizer
 
-# endif // defined(V3DLIB_ENABLE_SUITESPARSE)
 
 //**********************************************************************
 

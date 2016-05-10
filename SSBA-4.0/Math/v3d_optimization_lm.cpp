@@ -1,6 +1,5 @@
-#include "Math/v3d_optimization.h"
+#include "../Math/v3d_optimization.h"
 
-#if defined(V3DLIB_ENABLE_SUITESPARSE)
 //# include "COLAMD/Include/colamd.h"
 #include <suitesparse/colamd.h>
 # if 0
@@ -10,9 +9,8 @@ extern "C"
 #  include "ldl.h"
 }
 # else
-#  include "Math/v3d_ldl_private.h"
+#  include "../Math/v3d_ldl_private.h"
 # endif
-#endif
 
 #include <iostream>
 #include <map>
@@ -24,8 +22,6 @@ using namespace std;
 
 namespace V3D
 {
-
-#if defined(V3DLIB_ENABLE_SUITESPARSE)
 
    void
    SparseLM_CostFunction::fillAllJacobians()
@@ -1016,6 +1012,5 @@ namespace V3D
          cout << "Leaving ExtSparseLevenbergOptimizer::minimize()." << endl;
    } // end ExtSparseLevenbergOptimizer::minimize()
 
-#endif // defined(V3DLIB_ENABLE_SUITESPARSE)
 
 } // end namespace V3D

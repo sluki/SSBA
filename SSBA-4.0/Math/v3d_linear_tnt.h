@@ -5,8 +5,8 @@
 
 // This is adapted from the TNT matrix and linear algebra library, which is in the public domain.
 
-#include "Math/v3d_linear.h"
-#include "Base/v3d_exception.h"
+#include "../Math/v3d_linear.h"
+#include "../Base/v3d_exception.h"
 
 namespace V3D
 {

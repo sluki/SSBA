@@ -1,6 +1,4 @@
-#include "Geometry/v3d_metricbundle.h"
-
-#if defined(V3DLIB_ENABLE_SUITESPARSE)
+#include "v3d_metricbundle.h"
 
 namespace
 {
@@ -358,5 +356,3 @@ namespace V3D
    } // end VaryingInternalsMetricBundleOptimizer::updateParametersC()
 
 } // end namespace V3D
-
-#endif // defined(V3DLIB_ENABLE_SUITESPARSE)
