@@ -14,38 +14,38 @@ namespace V3D
    {
          CameraMatrix()
          {
-            makeIdentityMatrix(_K);
-            makeIdentityMatrix(_R);
-            makeZeroVector(_T);
+            makeIdentityMatrix(_k);
+            makeIdentityMatrix(_r);
+            makeZeroVector(_t);
             this->updateCachedValues(true, true);
          }
 
          CameraMatrix(double f, double cx, double cy)
          {
-            makeIdentityMatrix(_K);
-            _K[0][0] = f;
-            _K[1][1] = f;
-            _K[0][2] = cx;
-            _K[1][2] = cy;
-            makeIdentityMatrix(_R);
-            makeZeroVector(_T);
+            makeIdentityMatrix(_k);
+            _k[0][0] = f;
+            _k[1][1] = f;
+            _k[0][2] = cx;
+            _k[1][2] = cy;
+            makeIdentityMatrix(_r);
+            makeZeroVector(_t);
             this->updateCachedValues(true, true);
          }
 
          CameraMatrix(Matrix3x3d const& K,
                       Matrix3x3d const& R,
                       Vector3d const& T)
-            : _K(K), _R(R), _T(T)
+            : _k(K), _r(R), _t(T)
          {
             this->updateCachedValues(true, true);
          }
 
          CameraMatrix(Matrix3x3d const& K,
                       Matrix3x4d const& RT)
-            : _K(K)
+            : _k(K)
          {
-             _R = RT.slice<3,3>(0,0);
-             _T = RT.col(3);
+             _r = RT.slice<3,3>(0,0);
+             _t = RT.col(3);
             this->updateCachedValues(true, true);
          }
 
@@ -109,82 +109,82 @@ namespace V3D
 
             scaleMatrixIP(1.0 / K[2][2], K); // Normalize, such that lower-right element is 1.
 
-            _K = K;
-            _R = R;
-            _T = T;
+            _k = K;
+            _r = R;
+            _t = T;
             this->updateCachedValues(true, true);
          }
 
          CameraMatrix & operator = ( const CameraMatrix &cam )
          {
-             _K = cam.getIntrinsic();
-             _R = cam.getRotation();
-             _T = cam.getTranslation();
+             _k = cam.getIntrinsic();
+             _r = cam.getRotation();
+             _t = cam.getTranslation();
              _size=cam._size;
              this->updateCachedValues(true, true);
              return *this;
          }
 
-         void setIntrinsic(Matrix3x3d const& K) { _K = K; this->updateCachedValues(true, false); }
-         void setRotation(Matrix3x3d const& R) { _R = R; this->updateCachedValues(false, true); }
-         void setTranslation(Vector3d const& T) { _T = T; this->updateCachedValues(false, true); }
+         void setIntrinsic(Matrix3x3d const& K) { _k = K; this->updateCachedValues(true, false); }
+         void setRotation(Matrix3x3d const& R) { _r = R; this->updateCachedValues(false, true); }
+         void setTranslation(Vector3d const& T) { _t = T; this->updateCachedValues(false, true); }
 
-         void setCameraCenter(Vector3d const& c) { this->setTranslation(-1.0 * (_R * c)); }
+         void setCameraCenter(Vector3d const& c) { this->setTranslation(-1.0 * (_r * c)); }
 
          template <typename Mat>
          void setOrientation(Mat const& RT)
          {
-            _R[0][0] = RT[0][0]; _R[0][1] = RT[0][1]; _R[0][2] = RT[0][2];
-            _R[1][0] = RT[1][0]; _R[1][1] = RT[1][1]; _R[1][2] = RT[1][2];
-            _R[2][0] = RT[2][0]; _R[2][1] = RT[2][1]; _R[2][2] = RT[2][2];
-            _T[0]    = RT[0][3]; _T[1]    = RT[1][3]; _T[2]    = RT[2][3];
+            _r[0][0] = RT[0][0]; _r[0][1] = RT[0][1]; _r[0][2] = RT[0][2];
+            _r[1][0] = RT[1][0]; _r[1][1] = RT[1][1]; _r[1][2] = RT[1][2];
+            _r[2][0] = RT[2][0]; _r[2][1] = RT[2][1]; _r[2][2] = RT[2][2];
+            _t[0]    = RT[0][3]; _t[1]    = RT[1][3]; _t[2]    = RT[2][3];
             this->updateCachedValues(false, true);
          }
 
-         Matrix3x3d const& getIntrinsic()   const { return _K; }
-         Matrix3x3d const& getRotation()    const { return _R; }
-         Vector3d   const& getTranslation() const { return _T; }
+         Matrix3x3d const& getIntrinsic()   const { return _k; }
+         Matrix3x3d const& getRotation()    const { return _r; }
+         Vector3d   const& getTranslation() const { return _t; }
 
          Matrix3x4d getExtrinsic() const
          {
             Matrix3x4d RT;
-            copyMatrixSlice(_R,0,0,3,3,RT,0,0);
-            RT[0][3] = _T[0];
-            RT[1][3] = _T[1];
-            RT[2][3] = _T[2];
+            copyMatrixSlice(_r,0,0,3,3,RT,0,0);
+            RT[0][3] = _t[0];
+            RT[1][3] = _t[1];
+            RT[2][3] = _t[2];
             return RT;
          }
 
          Matrix3x4d getOrientation() const
          {
             Matrix3x4d RT;
-            RT[0][0] = _R[0][0]; RT[0][1] = _R[0][1]; RT[0][2] = _R[0][2];
-            RT[1][0] = _R[1][0]; RT[1][1] = _R[1][1]; RT[1][2] = _R[1][2];
-            RT[2][0] = _R[2][0]; RT[2][1] = _R[2][1]; RT[2][2] = _R[2][2];
-            RT[0][3] = _T[0];    RT[1][3] = _T[1];    RT[2][3] = _T[2];
+            RT[0][0] = _r[0][0]; RT[0][1] = _r[0][1]; RT[0][2] = _r[0][2];
+            RT[1][0] = _r[1][0]; RT[1][1] = _r[1][1]; RT[1][2] = _r[1][2];
+            RT[2][0] = _r[2][0]; RT[2][1] = _r[2][1]; RT[2][2] = _r[2][2];
+            RT[0][3] = _t[0];    RT[1][3] = _t[1];    RT[2][3] = _t[2];
             return RT;
          }
 
          Matrix3x4d getProjection() const
          {
             Matrix3x4d const RT = this->getOrientation();
-            return _K * RT;
+            return _k * RT;
          }
 
-         double getFocalLength() const { return _K[0][0]; }
-         double getAspectRatio() const { return _K[1][1] / _K[0][0]; }
+         double getFocalLength() const { return _k[0][0]; }
+         double getAspectRatio() const { return _k[1][1] / _k[0][0]; }
 
          Vector2d getPrincipalPoint() const
          {
             Vector2d pp;
-            pp[0] = _K[0][2];
-            pp[1] = _K[1][2];
+            pp[0] = _k[0][2];
+            pp[1] = _k[1][2];
             return pp;
          }
 
          Vector2d projectPoint(Vector3d const& X) const
          {
-            Vector3d q = _K*(_R*X + _T);
+            Vector3d q = _k*(_r*X + _t);
             Vector2d res;
             res[0] = q[0]/q[2]; res[1] = q[1]/q[2];
             return res;
@@ -193,15 +193,15 @@ namespace V3D
          template <typename Distortion>
          Vector2d projectPoint(Distortion const& distortion, Vector3d const& X) const
          {
-            Vector3d XX = _R*X + _T;
+            Vector3d XX = _r*X + _t;
             Vector2d p;
             p[0] = XX[0] / XX[2];
             p[1] = XX[1] / XX[2];
             p = distortion(p);
 
             Vector2d res;
-            res[0] = _K[0][0] * p[0] + _K[0][1] * p[1] + _K[0][2];
-            res[1] =                   _K[1][1] * p[1] + _K[1][2];
+            res[0] = _k[0][0] * p[0] + _k[0][1] * p[1] + _k[0][2];
+            res[1] =                   _k[1][1] * p[1] + _k[1][2];
             return res;
          }
          template<typename T>
@@ -227,12 +227,12 @@ namespace V3D
 
          Vector3d transformPointIntoCameraSpace(Vector3d const& p) const
          {
-            return _R*p + _T;
+            return _r*p + _t;
          }
 
          Vector3d transformPointFromCameraSpace(Vector3d const& p) const
          {
-            return _Rt*(p-_T);
+            return _Rt*(p-_t);
          }
 
          Vector3d transformDirectionFromCameraSpace(Vector3d const& dir) const
@@ -242,12 +242,12 @@ namespace V3D
 
          Vector3d transformDirectionIntoCameraSpace(Vector3d const& dir) const
          {
-            return _R*dir;
+            return _r*dir;
          }
          template<typename T>
          InlineVector<T,2> transformPointIntoNormalizedCoordinate(InlineVector<T,2> const& p) const
          {
-            return InlineVector<T,2>(_K[0][0] * p[0] + _K[0][1] * p[1] + _K[0][2],_K[1][1] * p[1] + _K[1][2]);
+            return InlineVector<T,2>(_k[0][0] * p[0] + _k[0][1] * p[1] + _k[0][2],_k[1][1] * p[1] + _k[1][2]);
          }
          template<typename T>
          InlineVector<T,2> transformPointFromNormalizedCoordinate(InlineVector<T,2> const& p) const
@@ -299,7 +299,7 @@ namespace V3D
          void serialize(Archive& ar)
          {
             V3D::SerializationScope<Archive> scope(ar, "CameraMatrix");
-            ar & _K & _R & _T;
+            ar & _k & _r & _t;
             if (ar.isLoading())
                this->updateCachedValues(true, true);
          }
@@ -322,17 +322,17 @@ namespace V3D
       protected:
          void updateCachedValues(bool intrinsic, bool orientation)
          {
-            if (intrinsic) _invK = invertedMatrix(_K);
+            if (intrinsic) _invK = invertedMatrix(_k);
 
             if (orientation)
             {
-               makeTransposedMatrix(_R, _Rt);
-               _center = _Rt * (-1.0 * _T);
+               makeTransposedMatrix(_r, _Rt);
+               _center = _Rt * (-1.0 * _t);
             }
          }
 
-         Matrix3x3d _K, _R;
-         Vector3d   _T;
+         Matrix3x3d _k, _r;
+         Vector3d   _t;
          Matrix3x3d _invK, _Rt;
          Vector3d   _center;
          Vector2f _size;

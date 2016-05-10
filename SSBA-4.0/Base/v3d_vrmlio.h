@@ -2,7 +2,7 @@
 #ifndef V3D_VRMLIO_H
 #define V3D_VRMLIO_H
 
-#include "Geometry/v3d_cameramatrix.h"
+#include "../Geometry/v3d_cameramatrix.h"
 #include <iostream>
 #include <string>
 #include <cstdio>
